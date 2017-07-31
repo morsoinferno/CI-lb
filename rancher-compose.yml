@@ -1,0 +1,64 @@
+version: '2'
+services:
+  ciproject-lb:
+    scale: 1
+    lb_config:
+      # reglas para HAProxy
+      # acme-challenge para lets Encrypt no direcciona a 443
+      # todo lo demas redirecciona a 443 (https)
+      # https://www.digitalocean.com/community/tutorials/how-to-secure-your-rancher-web-app-with-let-s-encrypt-on-ubuntu-16-04
+      config: |-
+        frontend 80
+        acl lepath path_beg -i /.well-known/acme-challenge
+        redirect scheme https code 301 if  !lepath !{ ssl_fc }
+
+      certs:
+        - "ci-project"
+      default_cert: "ci-project"
+
+      port_rules:
+      - source_port: 80
+        target_port: 80
+        service: "letsencrypt/letsencrypt"
+        protocol: "http"
+        hostname: "ciproject.diinf.usach.cl"
+        path: "/.well-known/acme-challenge"
+
+      - source_port: 80
+        target_port: 80
+        service: "letsencrypt/letsencrypt"
+        protocol: "http"
+        hostname: "gitlab.diinf.usach.cl"
+        path: "/.well-known/acme-challenge"
+
+      - source_port: 80
+        target_port: 80
+        service: "letsencrypt/letsencrypt"
+        protocol: "http"
+        hostname: "jenkins.diinf.usach.cl"
+        path: "/.well-known/acme-challenge"
+
+      - source_port: 443
+        target_port: 2368
+        service: "ghost/ghost"
+        protocol: "https"
+        hostname: "ciproject.diinf.usach.cl"
+
+      - source_port: 443
+        target_port: 8080
+        service: "ci-project/jenkins"
+        protocol: "https"
+        hostname: "jenkins.diinf.usach.cl"
+    
+      - source_port: 443
+        target_port: 80
+        service: "ci-project/gitlab"
+        protocol: "https"
+        hostname: "gitlab.diinf.usach.cl"
+
+    # health_check:
+    #   port: 42
+    #   interval: 2000
+    #   unhealthy_threshold: 3
+    #   healthy_threshold: 2
+    #   response_timeout: 2000
