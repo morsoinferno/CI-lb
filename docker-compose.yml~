@@ -5,3 +5,4 @@ services:
     - 80
     - 443
     image: rancher/lb-service-haproxy:v0.7.8
+

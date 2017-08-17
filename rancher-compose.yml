@@ -38,6 +38,71 @@ services:
         hostname: "jenkins.diinf.usach.cl"
         path: "/.well-known/acme-challenge"
 
+        source_port: 80
+        target_port: 80
+        service: "letsencrypt/letsencrypt"
+        protocol: "http"
+        hostname: "test.diinf.usach.cl"
+        path: "/.well-known/acme-challenge
+
+      - source_port: 80
+        target_port: 80
+        service: "letsencrypt/letsencrypt"
+        protocol: "http"
+        hostname: "prueba.diinf.usach.cl"
+        path: "/.well-known/acme-challenge
+
+      - source_port: 80
+        target_port: 80
+        service: "letsencrypt/letsencrypt"
+        protocol: "http"
+        hostname: "taiga.diinf.usach.cl"
+        path: "/.well-known/acme-challenge
+
+      - source_port: 80
+        target_port: 80
+        service: "letsencrypt/letsencrypt"
+        protocol: "http"
+        hostname: "sonarqube.diinf.usach.cl"
+        path: "/.well-known/acme-challenge
+
+      - source_port: 80
+        target_port: 80
+        service: "letsencrypt/letsencrypt"
+        protocol: "http"
+        hostname: "testlink.diinf.usach.cl"
+        path: "/.well-known/acme-challenge
+
+      - source_port: 443
+        target_port: 80
+        service: "taiga/taiga
+        protocol: "https"
+        hostname: "test.diinf.usach.cl"
+
+      - source_port: 433
+        target_port: 80
+        service: "taiga/taiga"
+        protocol: "https"
+        hostname: "prueba.diinf.usach.cl"
+
+      - source_port: 443
+        target_port: 80
+        service: "taiga/taiga"
+        protocol: "https"
+        hostname: "testlink.diinf.usach.cl"
+
+      - source_port: 443
+        target_port: 80
+        service: "taiga/taiga"
+        protocol: "https"
+        hostname: "sonarqube.diinf.usach.cl"
+
+      - source_port: 443
+        target_port: 80
+        service: "taiga/taiga"
+        protocol: "https"
+        hostname: "taiga.diinf.usach.cl"
+
       - source_port: 443
         target_port: 2368
         service: "ghost/ghost"

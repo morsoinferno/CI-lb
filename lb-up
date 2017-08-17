@@ -2,7 +2,7 @@
 
 export PROJECT_NAME=lb
 
-export RANCHER_COMPOSE=~/Documents/CI/rancher-compose/rancher-compose-v0.12.3
+export RANCHER_COMPOSE=~/Documents/CI/rancher-compose/rancher-compose-v0.12.5
 export RANCHER_ACCESS_KEY=`cat $RANCHER_COMPOSE/pehuelche-CI-environ-access-key`
 export RANCHER_SECRET_KEY=`cat $RANCHER_COMPOSE//pehuelche-CI-environ-secret-key`
 
